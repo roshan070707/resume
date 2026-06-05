@@ -1,0 +1,151 @@
+.templateContainer {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #333;
+  line-height: 1.5;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 2px solid #2563eb; /* Modern Blue */
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #2563eb;
+  margin: 0 0 1rem 0;
+}
+
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.contactRow, .socialRow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.contactItem a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contactItem a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.contactIcon {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.summary {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.itemMain {
+  font-size: 1.05rem;
+  color: #111;
+}
+
+.itemDate {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.itemSub {
+  font-size: 0.95rem;
+  color: #475569;
+  font-style: italic;
+}
+
+.itemDescription {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0.25rem 0 0 0;
+  white-space: pre-wrap;
+}
+
+.link a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skillPill {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

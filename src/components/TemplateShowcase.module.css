@@ -1,0 +1,150 @@
+.section {
+  padding: 6rem 0;
+  background-color: var(--bg-color);
+  overflow: hidden;
+  border-top: 1px solid var(--glass-border);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+  padding: 0 2rem;
+}
+
+.headline {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.subheadline {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.marqueeContainer {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  display: flex;
+  padding: 2rem 0;
+}
+
+/* Add subtle fade masks to the edges */
+.marqueeContainer::before,
+.marqueeContainer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15vw;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.marqueeContainer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-color), transparent);
+}
+
+.marqueeContainer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-color), transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 3rem;
+  padding-left: 3rem; /* match gap to ensure smooth loop */
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 1.5rem)); } /* Shift exactly half the track width including gap */
+}
+
+.mockupWrapper {
+  width: 320px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+}
+
+.mockupWrapper:hover {
+  transform: translateY(-8px);
+  border-color: var(--glass-border-hover);
+}
+
+.mockupHeader {
+  height: 24px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--glass-border);
+}
+
+.mockupBody {
+  padding: 2rem;
+  background: radial-gradient(var(--bg-surface) 1px, transparent 0);
+  background-size: 12px 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.paper {
+  width: 100%;
+  aspect-ratio: 1 / 1.414; /* A4 proportion */
+  background: white;
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+}
+
+.templateName {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--glass-border);
+  background: var(--bg-surface);
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2rem;
+  }
+  .mockupWrapper {
+    width: 260px;
+  }
+}
