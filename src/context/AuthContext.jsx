@@ -21,6 +21,7 @@ const formatUser = (supabaseUser) => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   useEffect(() => {
     // Use getUser() for a secure server-side verified session on initial load.
@@ -33,6 +34,9 @@ export const AuthProvider = ({ children }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(formatUser(session?.user ?? null));
       setLoading(false);
+      if (session?.user) {
+        setIsAuthModalOpen(false);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -108,7 +112,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: window.location.origin,
       });
       if (error) throw error;
       toast.success('Password reset link sent to your email!');
@@ -150,7 +154,7 @@ export const AuthProvider = ({ children }) => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
+          redirectTo: window.location.origin,
         },
       });
       if (error) throw error;
@@ -162,7 +166,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut, resetPassword, signInWithGoogle, upgradeToPremium }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      isAuthModalOpen, 
+      setIsAuthModalOpen, 
+      signUp, 
+      signIn, 
+      signOut, 
+      resetPassword, 
+      signInWithGoogle, 
+      upgradeToPremium 
+    }}>
       {children}
     </AuthContext.Provider>
   );

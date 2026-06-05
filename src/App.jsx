@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import DashboardList from './pages/DashboardList';
-import Auth from './pages/Auth';
 import TemplateGallery from './pages/TemplateGallery';
 import AtsPage from './pages/AtsPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import AuthModal from './components/AuthModal';
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, setIsAuthModalOpen } = useAuth();
   if (loading) {
     return (
       <div style={{
@@ -41,20 +41,26 @@ const ProtectedRoute = ({ children }) => {
     );
   }
   if (!user) {
-    return <Navigate to="/auth" replace />;
+    // If not logged in and trying to access protected route, open modal and go home
+    setIsAuthModalOpen(true);
+    return <Navigate to="/" replace />;
   }
   return children;
 };
 
 const FirstVisitHandler = ({ children }) => {
-  const navigate = useNavigate();
+  const { user, loading, setIsAuthModalOpen } = useAuth();
+  
   useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisited');
-    if (!hasVisited) {
-      localStorage.setItem('hasVisited', 'true');
-      navigate('/auth', { replace: true });
+    if (!loading && !user) {
+      const hasPoppedUp = sessionStorage.getItem('authPrompted');
+      if (!hasPoppedUp) {
+        setIsAuthModalOpen(true);
+        sessionStorage.setItem('authPrompted', 'true');
+      }
     }
-  }, [navigate]);
+  }, [loading, user, setIsAuthModalOpen]);
+
   return children;
 };
 
@@ -62,10 +68,10 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <AuthModal />
         <FirstVisitHandler>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/ats" element={<AtsPage />} />
             <Route 
               path="/dashboard" 
