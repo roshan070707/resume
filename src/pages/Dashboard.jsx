@@ -100,6 +100,23 @@ const Dashboard = () => {
         windowHeight: previewRef.current.scrollHeight
       });
       
+      // Capture all link rects and URLs while the scale transform is still disabled (none)
+      const containerRect = previewRef.current.getBoundingClientRect();
+      const linksData = [];
+      const links = previewRef.current.querySelectorAll('a');
+      links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const rect = link.getBoundingClientRect();
+        linksData.push({
+          href,
+          x: rect.left - containerRect.left,
+          y: rect.top - containerRect.top,
+          w: rect.width,
+          h: rect.height
+        });
+      });
+      
       const imgData = canvas.toDataURL('image/png');
       
       // A4 format in mm
@@ -127,6 +144,23 @@ const Dashboard = () => {
         pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
         heightLeft -= pdfHeight;
       }
+      
+      // Map and write clickable link annotations on top of the PDF pages
+      const scaleX = pdfWidth / containerRect.width;
+      const scaleY = imgHeight / containerRect.height;
+      
+      linksData.forEach(linkInfo => {
+        const pdfX = linkInfo.x * scaleX;
+        const pdfY = linkInfo.y * scaleY;
+        const pdfW = linkInfo.w * scaleX;
+        const pdfH = linkInfo.h * scaleY;
+        
+        const pageIndex = Math.floor(pdfY / pdfHeight);
+        const localY = pdfY - (pageIndex * pdfHeight);
+        
+        pdf.setPage(pageIndex + 1);
+        pdf.link(pdfX, localY, pdfW, pdfH, { url: linkInfo.href });
+      });
       
       const fileName = `${data.personal.firstName || 'Resume'}_${data.personal.lastName || 'Export'}.pdf`;
       
