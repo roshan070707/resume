@@ -281,7 +281,7 @@ const Dashboard = () => {
               fontWeight: 600,
               fontSize: '1rem',
               outline: 'none',
-              width: '180px',
+              width: isMobile ? '100px' : '180px',
               padding: '4px 8px',
               borderRadius: '6px',
               transition: 'background var(--transition-fast)'
@@ -292,7 +292,7 @@ const Dashboard = () => {
           />
           <div style={{ height: '16px', width: '1px', background: 'var(--glass-border)', margin: '0 4px' }}></div>
           {/* Save Status Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginLeft: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginLeft: '0.25rem' }}>
             <span style={{
               width: '6px',
               height: '6px',
@@ -302,14 +302,16 @@ const Dashboard = () => {
               flexShrink: 0,
               transition: 'background 0.3s ease'
             }} />
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 500, whiteSpace: 'nowrap' }}>
-              {saving
-                ? 'Saving…'
-                : lastSaved
-                  ? `Saved to cloud · ${saveTimeAgo}`
-                  : 'Saved to cloud'
-              }
-            </span>
+            {!isMobile && (
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                {saving
+                  ? 'Saving…'
+                  : lastSaved
+                    ? `Saved to cloud · ${saveTimeAgo}`
+                    : 'Saved to cloud'
+                }
+              </span>
+            )}
           </div>
         </div>
 
@@ -370,11 +372,11 @@ const Dashboard = () => {
               <Target size={16} /> <span>ATS Scan</span>
             </button>
           )}
-          <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSave} style={isMobile ? { padding: '0.5rem' } : {}}>
-            <Save size={16} /> {!isMobile && <span>Save</span>}
+          <button className={`${styles.actionBtn} ${styles.saveBtn}`} onClick={handleSave} style={isMobile ? { padding: '0.4rem 0.6rem', gap: '0.25rem' } : {}}>
+            <Save size={16} /> <span style={isMobile ? { display: 'inline', fontSize: '0.75rem' } : {}}>Save</span>
           </button>
-          <button className={`${styles.actionBtn} ${styles.exportBtn}`} onClick={handleExportPDF} style={isMobile ? { padding: '0.5rem' } : {}}>
-            <Download size={16} /> {!isMobile && <span>Export PDF</span>}
+          <button className={`${styles.actionBtn} ${styles.exportBtn}`} onClick={handleExportPDF} style={isMobile ? { padding: '0.4rem 0.6rem', gap: '0.25rem' } : {}}>
+            <Download size={16} /> <span style={isMobile ? { display: 'inline', fontSize: '0.75rem' } : {}}>{isMobile ? 'PDF' : 'Export PDF'}</span>
           </button>
         </div>
       </header>
