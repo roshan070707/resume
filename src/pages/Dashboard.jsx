@@ -106,10 +106,21 @@ const Dashboard = () => {
       const links = previewRef.current.querySelectorAll('a');
       links.forEach(link => {
         const href = link.getAttribute('href');
-        if (!href) return;
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+        
+        // Ensure absolute URL with protocol for jsPDF compatibility
+        let absoluteUrl = href;
+        if (!/^https?:\/\//i.test(href) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+          try {
+            absoluteUrl = new URL(href, window.location.origin).href;
+          } catch (e) {
+            return; // Skip invalid urls
+          }
+        }
+        
         const rect = link.getBoundingClientRect();
         linksData.push({
-          href,
+          href: absoluteUrl,
           x: rect.left - containerRect.left,
           y: rect.top - containerRect.top,
           w: rect.width,
@@ -148,6 +159,7 @@ const Dashboard = () => {
       // Map and write clickable link annotations on top of the PDF pages
       const scaleX = pdfWidth / containerRect.width;
       const scaleY = imgHeight / containerRect.height;
+      const totalPages = pdf.internal.getNumberOfPages();
       
       linksData.forEach(linkInfo => {
         const pdfX = linkInfo.x * scaleX;
@@ -156,10 +168,14 @@ const Dashboard = () => {
         const pdfH = linkInfo.h * scaleY;
         
         const pageIndex = Math.floor(pdfY / pdfHeight);
-        const localY = pdfY - (pageIndex * pdfHeight);
+        const pageNumber = pageIndex + 1;
         
-        pdf.setPage(pageIndex + 1);
-        pdf.link(pdfX, localY, pdfW, pdfH, { url: linkInfo.href });
+        // Strictly verify page number is within bounds before setting page
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+          const localY = pdfY - (pageIndex * pdfHeight);
+          pdf.setPage(pageNumber);
+          pdf.link(pdfX, localY, pdfW, pdfH, { url: linkInfo.href });
+        }
       });
       
       const fileName = `${data.personal.firstName || 'Resume'}_${data.personal.lastName || 'Export'}.pdf`;
