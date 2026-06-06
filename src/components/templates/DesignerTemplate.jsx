@@ -76,8 +76,8 @@ const DesignerTemplate = ({ data }) => {
             <div style={{ marginBottom: '30px' }}>
               <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#1a202c', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '15px' }}>Expertise</h2>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {skills.map(s => (
-                  <li key={s.id} style={{ fontSize: '14px', color: '#4a5568' }}>{s.name}</li>
+                {skills.map((s, idx) => (
+                  <li key={idx} style={{ fontSize: '14px', color: '#4a5568' }}>{typeof s === 'string' ? s : (s?.name || s?.title || '')}</li>
                 ))}
               </ul>
             </div>
@@ -113,8 +113,8 @@ const DesignerTemplate = ({ data }) => {
               {experience.map(exp => (
                 <div key={exp.id} style={{ marginBottom: '25px', position: 'relative' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '5px' }}>
-                    <span style={{ fontWeight: '800', fontSize: '16px', color: '#1a202c' }}>{exp.position}</span>
-                    <span style={{ fontSize: '13px', color: '#ec4899', fontWeight: '600' }}>{exp.startDate} - {exp.endDate || 'Present'}</span>
+                    <span style={{ fontWeight: '800', fontSize: '16px', color: '#1a202c' }}>{exp.title || exp.position}</span>
+                    <span style={{ fontSize: '13px', color: '#ec4899', fontWeight: '600' }}>{exp.startDate} - {exp.endDate || exp.current ? 'Present' : exp.endDate}</span>
                   </div>
                   <div style={{ fontSize: '14px', color: '#718096', fontWeight: '500', marginBottom: '10px' }}>
                     {exp.company}
