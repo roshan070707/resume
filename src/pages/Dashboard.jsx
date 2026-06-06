@@ -78,8 +78,16 @@ const Dashboard = () => {
     if (!previewRef.current) return;
     
     const toastId = toast.loading('Preparing PDF... (This may take a moment)');
+    const motionDiv = previewRef.current.closest('.print-wrapper')?.parentElement;
+    let originalTransform = '';
+    
     try {
-      // Temporarily ensure scaling doesn't affect the canvas capture quality
+      // Temporarily reset the scale transform of the motion.div parent to 1:1 to prevent html2canvas text overlapping bugs
+      if (motionDiv) {
+        originalTransform = motionDiv.style.transform;
+        motionDiv.style.transform = 'none';
+      }
+      
       const canvas = await html2canvas(previewRef.current, { 
         scale: 2, 
         useCORS: true,
@@ -129,6 +137,11 @@ const Dashboard = () => {
     } catch (error) {
       console.error('PDF generation error:', error);
       toast.error('Failed to generate PDF. Please try again.', { id: toastId });
+    } finally {
+      // Restore original scale transform
+      if (motionDiv) {
+        motionDiv.style.transform = originalTransform;
+      }
     }
   };
 
