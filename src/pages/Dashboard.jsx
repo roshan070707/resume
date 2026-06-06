@@ -84,10 +84,15 @@ const Dashboard = () => {
         scale: 2, 
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        allowTaint: true,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: previewRef.current.scrollWidth,
+        windowHeight: previewRef.current.scrollHeight
       });
       
-      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const imgData = canvas.toDataURL('image/png');
       
       // A4 format in mm
       const pdf = new jsPDF({
@@ -97,27 +102,33 @@ const Dashboard = () => {
       });
       
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
       
-      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+      // Handle multi-page if content exceeds one page
+      let heightLeft = imgHeight;
+      let position = 0;
+      
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+      
+      while (heightLeft > 0) {
+        position = -(imgHeight - heightLeft);
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
       
       const fileName = `${data.personal.firstName || 'Resume'}_${data.personal.lastName || 'Export'}.pdf`;
       
-      // Use Blob and object URL for more reliable downloading
-      const blob = pdf.output('blob');
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 100);
+      // Use pdf.save() directly - most reliable cross-browser method
+      pdf.save(fileName);
       
       toast.success('PDF Downloaded Successfully!', { id: toastId });
     } catch (error) {
       console.error('PDF generation error:', error);
-      toast.error('Failed to generate PDF. Make sure all images are valid.', { id: toastId });
+      toast.error('Failed to generate PDF. Please try again.', { id: toastId });
     }
   };
 
@@ -396,10 +407,10 @@ const Dashboard = () => {
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'center',
-            paddingTop: isFullscreen ? '4rem' : '4rem',
-            paddingBottom: isMobile ? '6rem' : '8rem',
-            paddingLeft: isFullscreen || isMobile ? '0' : leftSidebarOpen ? '500px' : '4rem',
-            paddingRight: isFullscreen || isMobile ? '0' : rightSidebarOpen ? '420px' : '4rem',
+            paddingTop: isFullscreen ? '2rem' : '2rem',
+            paddingBottom: isMobile ? '6rem' : '4rem',
+            paddingLeft: isFullscreen || isMobile ? '1rem' : leftSidebarOpen ? '490px' : '4rem',
+            paddingRight: isFullscreen || isMobile ? '1rem' : rightSidebarOpen ? '420px' : '4rem',
             zIndex: 10
           }}>
             <motion.div 
