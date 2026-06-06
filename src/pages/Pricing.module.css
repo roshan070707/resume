@@ -227,3 +227,42 @@
 .backBtn:hover {
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .pricingContainer {
+    padding: 3rem 1.25rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .header p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  .card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricingContainer {
+    padding: 2.5rem 1rem;
+  }
+  .header h1 {
+    font-size: 1.75rem;
+  }
+  .price {
+    font-size: 2.25rem;
+  }
+  .card {
+    padding: 1.5rem;
+    border-radius: 18px;
+  }
+  .feature {
+    font-size: 0.9rem;
+  }
+  .navBar {
+    left: 1rem;
+    top: 0.75rem;
+  }
+}

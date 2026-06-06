@@ -358,10 +358,18 @@
 }
 
 @media (max-width: 768px) {
-  .headline {
-    font-size: 2.5rem;
+  .scannerSection {
+    padding: 4rem 0;
   }
-  
+  .headline {
+    font-size: 2rem;
+  }
+  .header {
+    margin: 0 auto 3rem;
+  }
+  .resumeColumn {
+    height: 450px;
+  }
   .resumeContainer {
     width: 100%;
     max-width: 350px;
@@ -375,5 +383,62 @@
   .scoreRow {
     flex-direction: column;
     text-align: center;
+    padding: 1.5rem;
+  }
+  .panel {
+    padding: 1.5rem;
+  }
+  .suggestionItem {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scannerSection {
+    padding: 3rem 0;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .headline {
+    font-size: 1.6rem;
+  }
+  .subheadline {
+    font-size: 0.95rem;
+  }
+  .resumeColumn {
+    height: 380px;
+  }
+  .resumeContainer {
+    max-width: 280px;
+    height: 400px;
+  }
+  .glassResume {
+    padding: 1.5rem;
+  }
+  .resumeHeader {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
+  .scoreRingContainer {
+    width: 90px;
+    height: 90px;
+  }
+  .scoreNumber {
+    font-size: 1.5rem;
+  }
+  .scoreText h3 {
+    font-size: 1.15rem;
+  }
+  .scoreText p {
+    font-size: 0.85rem;
+  }
+  .panelTitle {
+    font-size: 1rem;
   }
 }

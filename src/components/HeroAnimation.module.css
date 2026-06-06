@@ -8,6 +8,7 @@
   perspective: 1200px;
   position: relative;
   z-index: 10;
+  overflow: hidden;
 }
 
 .perspectiveWrapper {
@@ -221,4 +222,92 @@
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    min-height: 400px;
+  }
+  .floatingCard {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .floatingCardSmall {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-height: 320px;
+    perspective: 800px;
+  }
+  .perspectiveWrapper {
+    max-width: 380px;
+  }
+  .appWindow {
+    height: 280px;
+  }
+  .sidebar {
+    width: 90px;
+    padding: 10px 6px;
+  }
+  .sidebarItem, .sidebarItemActive {
+    font-size: 0.65rem;
+    padding: 6px 6px;
+    gap: 4px;
+  }
+  .resumePaper {
+    padding: 14px;
+    gap: 10px;
+  }
+  .floatingCard {
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  .scoreCircle {
+    width: 36px;
+    height: 36px;
+  }
+  .scoreCircle span {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  .cardText h4 {
+    font-size: 0.7rem;
+  }
+  .cardText p {
+    font-size: 0.6rem;
+  }
+  .floatingCardSmall {
+    padding: 5px 8px;
+    font-size: 0.65rem;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    min-height: 250px;
+  }
+  .perspectiveWrapper {
+    max-width: 300px;
+  }
+  .appWindow {
+    height: 220px;
+  }
+  .sidebar {
+    display: none;
+  }
+  .floatingCard,
+  .floatingCardSmall {
+    display: none;
+  }
+  .resumePaper {
+    padding: 10px;
+    gap: 8px;
+  }
 }

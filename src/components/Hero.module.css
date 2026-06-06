@@ -58,7 +58,7 @@
 }
 
 .headline {
-  font-size: 4.5rem;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
   line-height: 1.1;
   font-weight: 700;
   font-family: var(--font-heading);
@@ -74,7 +74,7 @@
 }
 
 .subheadline {
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
   line-height: 1.6;
   color: var(--text-secondary);
   max-width: 540px;
@@ -85,6 +85,7 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .primaryBtn, .secondaryBtn {
@@ -147,5 +148,42 @@
   
   .visualContent {
     height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--header-height) + 2rem) 1.25rem 2rem 1.25rem;
+    min-height: auto;
+  }
+  
+  .visualContent {
+    height: 350px;
+  }
+  
+  .ctaGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .primaryBtn, .secondaryBtn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(var(--header-height) + 1.5rem) 1rem 1.5rem 1rem;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .visualContent {
+    height: 280px;
   }
 }

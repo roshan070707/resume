@@ -268,11 +268,49 @@
   .leftSidebar {
     position: absolute;
     left: 0;
+    width: 100%;
+    max-width: 360px;
     transform: translateX(-100%);
     box-shadow: var(--shadow-xl);
   }
   
   .leftSidebar.open {
     transform: translateX(0);
+  }
+  
+  .topNav {
+    padding: 0 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .headerCenter {
+    display: none;
+  }
+  
+  .headerActions {
+    gap: 0.5rem;
+  }
+  
+  .actionBtn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .topNav {
+    padding: 0 0.5rem;
+  }
+  .brand {
+    font-size: 0.95rem;
+    gap: 0.35rem;
+  }
+  .actionBtn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .actionBtn span {
+    display: none;
   }
 }

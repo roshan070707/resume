@@ -273,6 +273,15 @@
   }
 }
 @media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.25rem;
+  }
+  .header {
+    margin: 0 auto 2.5rem auto;
+  }
+  .headline {
+    font-size: 1.75rem;
+  }
   .dashboardWindow {
     height: 400px;
     transform: none;
@@ -286,5 +295,50 @@
   }
   .sectionTitle {
     display: none;
+  }
+  .mainContent {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .greeting {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+  .headline {
+    font-size: 1.5rem;
+  }
+  .subheadline {
+    font-size: 0.95rem;
+  }
+  .dashboardWindow {
+    height: 320px;
+    border-radius: 12px;
+  }
+  .mainContent {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .greeting {
+    font-size: 1rem;
+  }
+  .createBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  .statCard {
+    padding: 1rem;
+  }
+  .statValue {
+    font-size: 1.5rem;
   }
 }

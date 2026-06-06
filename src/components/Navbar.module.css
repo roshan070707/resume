@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -60,7 +60,27 @@
 .authButtons {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background var(--transition-fast);
+}
+
+.userAvatar:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.userName {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .loginBtn {
@@ -73,6 +93,24 @@
 
 .loginBtn:hover {
   opacity: 0.8;
+}
+
+.logoutBtn {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-fast);
+}
+
+.logoutBtn:hover {
+  border-color: rgba(239, 68, 68, 0.2);
+  color: var(--color-danger);
+  background: rgba(239, 68, 68, 0.05);
 }
 
 .getStartedBtn {
@@ -90,14 +128,129 @@
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
+/* ====== Hamburger Button ====== */
+.hamburger {
+  display: none;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ====== Mobile Slide-Down Menu ====== */
+.mobileMenu {
+  overflow: hidden;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.mobileMenuInner {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem 1.5rem;
+  gap: 0.25rem;
+}
+
+.mobileLink {
+  display: block;
+  padding: 0.75rem 0.5rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mobileLink:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  padding-left: 1rem;
+}
+
+.mobileDivider {
+  height: 1px;
+  background: var(--glass-border);
+  margin: 0.5rem 0;
+}
+
+.mobileCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem;
+  background: white;
+  color: var(--bg-color);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobileCta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.mobileLogout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem;
+  color: var(--color-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobileLogout:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ====== Responsive ====== */
 @media (max-width: 900px) {
   .navLinks {
     display: none;
   }
+  .authButtons {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 @media (max-width: 600px) {
-  .loginBtn {
-    display: none;
+  .navbar {
+    padding: 1rem 0;
+  }
+  .container {
+    padding: 0 1rem;
   }
 }

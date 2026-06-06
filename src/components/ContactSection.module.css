@@ -99,3 +99,48 @@
   border-radius: 50%;
   pointer-events: none;
 }
+
+@media (max-width: 768px) {
+  .contactSection {
+    padding: 4rem 1.25rem;
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .linksGrid {
+    gap: 1rem;
+  }
+  .linkCard {
+    min-width: 130px;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactSection {
+    padding: 3rem 1rem;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .linksGrid {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .linkCard {
+    width: 100%;
+    max-width: 280px;
+  }
+  .iconWrapper {
+    width: 48px;
+    height: 48px;
+  }
+  .linkTitle {
+    font-size: 1rem;
+  }
+}
