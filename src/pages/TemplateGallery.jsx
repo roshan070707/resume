@@ -43,6 +43,7 @@ const TemplateGallery = () => {
   };
 
   const templates = [
+    { id: 'classic_border', name: 'Classic Border', category: 'Academic/Classic', ats: '99%', class: '' },
     { id: 'modern_tech', name: 'Modern Tech', category: 'Tech/Engineering', ats: '98%', class: 'developer' },
     { id: 'minimal', name: 'Minimal', category: 'Clean/Simple', ats: '99%', class: '' },
     { id: 'executive', name: 'Executive', category: 'Leadership/Management', ats: '97%', class: '' },

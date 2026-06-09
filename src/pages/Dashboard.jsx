@@ -385,6 +385,7 @@ const Dashboard = () => {
               value={data.template} 
               onChange={(e) => updateTemplate(e.target.value)}
             >
+              <option value="classic_border">Classic Border</option>
               <option value="modern_tech">Modern Tech</option>
               <option value="minimal">Minimal</option>
               <option value="executive">Executive</option>

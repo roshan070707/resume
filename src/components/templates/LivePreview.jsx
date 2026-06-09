@@ -13,11 +13,14 @@ import HarvardTemplate from './HarvardTemplate';
 import StanfordTemplate from './StanfordTemplate';
 import ProductManagerTemplate from './ProductManagerTemplate';
 import DesignerTemplate from './DesignerTemplate';
+import ClassicBorderTemplate from './ClassicBorderTemplate';
 
 const LivePreview = forwardRef(({ data }, ref) => {
   
   const renderTemplate = () => {
     switch(data.template) {
+      case 'classic_border':
+        return <ClassicBorderTemplate data={data} />;
       case 'corporate':
         return <CorporateTemplate data={data} />;
       case 'student_fresher':
